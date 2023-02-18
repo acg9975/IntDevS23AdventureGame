@@ -3,21 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerController : MonoBehaviour
+public class improvedController : MonoBehaviour
 {
     float horizontalMove;
     public float speed;
     Rigidbody2D myBody;
-    SpriteRenderer sr;
 
     bool grounded = false;
     public float castDist = 0.2f;
     public float gravityScale = 5f;
     public float gravityFall = 40f;
     public float jumpLimit = 2f;
+
     bool jump = false;
 
     Animator anim;
+    SpriteRenderer sr;
 
     // Start is called before the first frame update
     void Start()
@@ -38,9 +39,16 @@ public class playerController : MonoBehaviour
 
         //left and right
         horizontalMove = Input.GetAxis("Horizontal");
-        
-        if (horizontalMove < -0.2 || horizontalMove > 0.2)
+
+        //change animator
+        if (horizontalMove > 0.1f)
         {
+            anim.SetBool("walking", true);
+            sr.flipX = false;
+        }
+        else if (horizontalMove < -0.1f )
+        {
+            sr.flipX = true;
             anim.SetBool("walking", true);
         }
         else
@@ -56,16 +64,11 @@ public class playerController : MonoBehaviour
             myBody.AddForce(Vector2.up * jumpLimit, ForceMode2D.Impulse);
             jump = false;
         }
-
-        //this checks if the velocity on the y
-        //if it is increasing, then decrease gravity to allow for larger jumps
-        //if it is decreasing or less than 0, then use the fall gravity rate
-        //gravityfall = when player is falling
-        //gravityscale = when player is in the air
+        
         if (myBody.velocity.y > 0)
         {
-            //gravity scale is used when player is going upwards 
             myBody.gravityScale = gravityScale;
+            //gravity scale is used when player is going upwards 
         }
         else if (myBody.velocity.y < 0)
         {
@@ -104,6 +107,4 @@ public class playerController : MonoBehaviour
         playerJump();
         checkGrounded();
     }
-
-
 }
