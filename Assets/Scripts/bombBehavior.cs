@@ -12,6 +12,9 @@ public class bombBehavior : MonoBehaviour
     float force = 10;
     [SerializeField]
     float explosionForce = 10;
+    [SerializeField]
+    bool implosion = false;
+
 
     [SerializeField]
     float bombTimer = 3;
@@ -32,7 +35,7 @@ public class bombBehavior : MonoBehaviour
 
     IEnumerator bombCountdown()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(bombTimer);
         isExploding = true ;
     }
 
@@ -41,15 +44,14 @@ public class bombBehavior : MonoBehaviour
         if (other.CompareTag("Explodable") && isExploding)
         {
             Rigidbody2D oRB = other.GetComponent<Rigidbody2D>();
-            oRB.AddForce(Vector2.SignedAngle( oRB.transform.position, transform.position)  * Vector2.one * explosionForce, ForceMode2D.Impulse);
-            Debug.Log(Vector2.SignedAngle(oRB.transform.position, transform.position));
+
+            Vector2 difference = new Vector2(other.transform.position.x - transform.position.x, other.transform.position.y - transform.position.y);
+
+            //check if it is an implosion, if it is, just negate the force, otherwise keep it the same
+            explosionForce = (implosion) ? -explosionForce : explosionForce;
+            oRB.AddForce(difference * explosionForce, ForceMode2D.Impulse);
             
         }
-        if (other.CompareTag("Pushable") && isExploding)
-        {
-
-        }
-
         if (isExploding)
         {
             Destroy(gameObject);

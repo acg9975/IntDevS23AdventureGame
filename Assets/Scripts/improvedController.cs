@@ -20,7 +20,11 @@ public class improvedController : MonoBehaviour
     Animator anim;
     SpriteRenderer sr;
 
-    // Start is called before the first frame update
+    //add sprinting
+
+    bool hasJumped = false;
+
+
     void Start()
     {
         myBody = GetComponent<Rigidbody2D>();
@@ -35,6 +39,7 @@ public class improvedController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && grounded)
         {
             jump = true;
+            StartCoroutine(hasJumpedTimer());
         }
 
         //left and right
@@ -65,7 +70,10 @@ public class improvedController : MonoBehaviour
             jump = false;
         }
         
-        if (myBody.velocity.y > 0)
+        
+
+
+        if (myBody.velocity.y > 0 && hasJumped)
         {
             myBody.gravityScale = gravityScale;
             //gravity scale is used when player is going upwards 
@@ -82,14 +90,19 @@ public class improvedController : MonoBehaviour
         //set the movespeed - we dont need to use deltatime in fixed update
         //we then add the velocity to it. 
         float moveSpeed = horizontalMove * speed;
+
+        //myBody.velocity += new Vector2(moveSpeed / 10, myBody.velocity.y / 12);
         myBody.velocity = new Vector3(moveSpeed, myBody.velocity.y, 0);
+
+
+
     }
 
     private void checkGrounded()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, castDist);
 
-        if (hit.collider != null && hit.transform.name == "Ground")
+        if (hit.collider != null && hit.transform.CompareTag("Ground"))
         {
             grounded = true;
         }
@@ -107,4 +120,13 @@ public class improvedController : MonoBehaviour
         playerJump();
         checkGrounded();
     }
+
+    IEnumerator hasJumpedTimer()
+    {
+
+        hasJumped = true;
+        yield return new WaitForSeconds(0.5f);
+        hasJumped = false;
+    }
+
 }

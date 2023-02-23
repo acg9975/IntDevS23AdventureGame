@@ -163,6 +163,7 @@ MonoBehaviour:
   target: {fileID: 2323256577071489675}
   endOfCannon: {fileID: 2323256577683876683}
   bomb: {fileID: 8009074583285484988, guid: 839ed39fe9c771844a2ad9e6b541da1f, type: 3}
+  implosionBomb: {fileID: 0}
   rotateDir: 0
 --- !u!1 &2323256577906248638
 GameObject:
@@ -174,7 +175,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2323256577906248637}
   - component: {fileID: 2323256577906248636}
-  - component: {fileID: 2323256577906248639}
   - component: {fileID: 2323256577906248633}
   - component: {fileID: 2323256577906248635}
   - component: {fileID: 2323256577906248634}
@@ -255,23 +255,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2323256577906248639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2323256577906248638}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1e53c54cc4205943a3c95ef05ebca71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  castDist: 0.5
-  gravityScale: 1
-  gravityFall: 1.5
-  jumpLimit: 5
 --- !u!114 &2323256577906248633
 MonoBehaviour:
   m_ObjectHideFlags: 0
