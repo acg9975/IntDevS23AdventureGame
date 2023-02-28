@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class improvedController : MonoBehaviour
 {
@@ -49,11 +50,11 @@ public class improvedController : MonoBehaviour
         if (horizontalMove > 0.1f)
         {
             anim.SetBool("walking", true);
-            sr.flipX = false;
+            sr.flipX = true;
         }
         else if (horizontalMove < -0.1f )
         {
-            sr.flipX = true;
+            sr.flipX = false;
             anim.SetBool("walking", true);
         }
         else
@@ -127,6 +128,32 @@ public class improvedController : MonoBehaviour
         hasJumped = true;
         yield return new WaitForSeconds(0.5f);
         hasJumped = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("winArea"))
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 0)
+            {
+                SceneManager.LoadScene(1);
+            }
+            else
+            {
+                SceneManager.LoadScene(0);
+            }
+        }
+        if (other.gameObject.CompareTag("lossArea"))
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 0)
+            {
+                SceneManager.LoadScene(0);
+            }
+            else
+            {
+                SceneManager.LoadScene(1);
+            }
+        }
     }
 
 }
