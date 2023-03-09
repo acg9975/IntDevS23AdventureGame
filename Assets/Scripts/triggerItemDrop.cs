@@ -17,7 +17,14 @@ public class triggerItemDrop : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            objectToRelease.SetActive(true);
+            if (objectToRelease == null)
+            {
+
+            }
+            else
+            {
+                objectToRelease.SetActive(true);
+            }
         }
     }
 }
