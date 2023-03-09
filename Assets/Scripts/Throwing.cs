@@ -15,8 +15,8 @@ public class Throwing : MonoBehaviour
     private Vector3 mousePos;
     private Camera mainCam;
 
-    [SerializeField]
-    float rotateDir = 0;
+    //[SerializeField]
+    //float rotateDir = 0;
 
     private void Start()
     {

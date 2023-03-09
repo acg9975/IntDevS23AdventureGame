@@ -430,6 +430,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AreaBoundary (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5819901868997809776, guid: 16c5c4d18c4281541901b994befa0bb5, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16c5c4d18c4281541901b994befa0bb5, type: 3}
 --- !u!1 &843800978
