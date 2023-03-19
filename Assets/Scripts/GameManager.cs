@@ -67,4 +67,5 @@ public class GameManager : MonoBehaviour
         endCamVC.Priority = playerFollow_VC.Priority + 1;
     }
 
+
 }

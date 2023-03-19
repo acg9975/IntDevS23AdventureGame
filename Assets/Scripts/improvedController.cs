@@ -134,14 +134,7 @@ public class improvedController : MonoBehaviour
     {
         if (other.CompareTag("winArea"))
         {
-            if (SceneManager.GetActiveScene().buildIndex == 0)
-            {
-                SceneManager.LoadScene(1);
-            }
-            else
-            {
-                SceneManager.LoadScene(0);
-            }
+            StartCoroutine(winTime());
         }
         if (other.gameObject.CompareTag("lossArea"))
         {
@@ -156,4 +149,14 @@ public class improvedController : MonoBehaviour
         }
     }
 
+    IEnumerator winTime()
+    {
+        GameObject.FindGameObjectWithTag("winArea").GetComponent<ParticleSystem>().Play();
+
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
 }
+
+
