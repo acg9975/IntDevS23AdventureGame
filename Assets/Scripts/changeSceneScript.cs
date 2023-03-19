@@ -5,11 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class changeSceneScript : MonoBehaviour
 {
+    public Scene s;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(0));
+            SceneManager.LoadScene(0);
         }
     }
 }

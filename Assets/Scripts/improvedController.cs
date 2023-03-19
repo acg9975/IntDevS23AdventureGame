@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class improvedController : MonoBehaviour
 {
@@ -138,14 +139,7 @@ public class improvedController : MonoBehaviour
         }
         if (other.gameObject.CompareTag("lossArea"))
         {
-            if (SceneManager.GetActiveScene().buildIndex == 0)
-            {
-                SceneManager.LoadScene(0);
-            }
-            else
-            {
-                SceneManager.LoadScene(1);
-            }
+            StartCoroutine(lossTime());
         }
     }
 
@@ -155,6 +149,22 @@ public class improvedController : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    IEnumerator lossTime()
+    {
+
+            CinemachineVirtualCamera PlayerFollowCam = GameObject.Find("PlayerFollowCam").GetComponent<CinemachineVirtualCamera>();
+            PlayerFollowCam.m_Follow = GameObject.Find("LossArea").transform;
+            sr.rendererPriority = -50;
+            myBody.gravityScale = 0.25f;
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+       
+
+        yield return new WaitForSeconds(3f);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 }
