@@ -9,6 +9,9 @@ public class bombBehavior : MonoBehaviour
     Throwing cannon;
 
     [SerializeField]
+    GameObject explosionFX;
+
+    [SerializeField]
     float force = 10;
     [SerializeField]
     float explosionForce = 10;
@@ -54,6 +57,7 @@ public class bombBehavior : MonoBehaviour
         }
         if (isExploding)
         {
+            Instantiate(explosionFX, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }

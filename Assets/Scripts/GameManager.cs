@@ -23,17 +23,18 @@ public class GameManager : MonoBehaviour
         //player = GameObject.Find("player");
         cb = Camera.main.GetComponent<CinemachineBrain>();
 
-        mainMenuCam = GameObject.Find("Main Menu Camera").GetComponent<CinemachineVirtualCamera>();
+        Scene cs = SceneManager.GetActiveScene();
+        if (cs.name == "levelOne")
+        {
+
+            endCamVC = GameObject.Find("EndVC").GetComponent<CinemachineVirtualCamera>();
+            mainMenuCam = GameObject.Find("Main Menu Camera").GetComponent<CinemachineVirtualCamera>();
+
+        }
+
 
         playerFollow_VC = GameObject.Find("Player Follow Cameras").GetComponent<CinemachineVirtualCamera>();
 
-        endCamVC = GameObject.Find("EndVC").GetComponent<CinemachineVirtualCamera>();
-        /*
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
-        {
-
-        }
-        */
     }
 
     void checkValue(GameObject obj)
@@ -62,10 +63,26 @@ public class GameManager : MonoBehaviour
         player.SetActive(true);
     }
     
+    public void changeActiveCam(CinemachineVirtualCamera cam)
+    {
+        CinemachineVirtualCamera vc = cam;
+        vc.Priority = playerFollow_VC.Priority + 1;
+    }
+
+    public void mainCamFollow(CinemachineVirtualCamera cam)
+    {
+        CinemachineVirtualCamera vc = cam;
+        vc.Priority = playerFollow_VC.Priority - 1;
+    }
+
     public void endingCameraChange()
     {
         endCamVC.Priority = playerFollow_VC.Priority + 1;
     }
 
+    public void stopPlayerMovement(bool val)
+    {
+        player.GetComponent<improvedController>().enabled = val;
+    }
 
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class cannonObjectScript : MonoBehaviour
 {
@@ -8,8 +9,15 @@ public class cannonObjectScript : MonoBehaviour
     BoxCollider2D bc;
     [SerializeField]
     GameObject cannon;
+    [SerializeField]
+    GameObject boundary;
+    GameManager gm;
+    [SerializeField]
+    CinemachineVirtualCamera vc;
+
     private void Start()
     {
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
         bc = GetComponent<BoxCollider2D>();
     }
 
@@ -18,7 +26,10 @@ public class cannonObjectScript : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             cannon.SetActive(true);
+            boundary.SetActive(false);
+            gm.mainCamFollow(vc);
             Destroy(gameObject);
+
         }
     }
 }

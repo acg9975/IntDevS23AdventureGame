@@ -9,6 +9,10 @@ TagManager:
   - CollisionArea
   - winArea
   - lossArea
+  - endingChange
+  - CutsceneBoundary
+  - cutsceneone
+  - cutscenetwo
   layers:
   - Default
   - TransparentFX

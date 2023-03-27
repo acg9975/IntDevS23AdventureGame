@@ -22,7 +22,10 @@ public class improvedController : MonoBehaviour
     Animator anim;
     SpriteRenderer sr;
 
-    //add sprinting
+
+    [SerializeField]
+    AudioSource AS;
+    
 
     bool hasJumped = false;
 
@@ -37,6 +40,7 @@ public class improvedController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //check for movement in update, do physics in fixed update
         if (Input.GetButtonDown("Jump") && grounded)
         {
@@ -51,11 +55,11 @@ public class improvedController : MonoBehaviour
         if (horizontalMove > 0.1f)
         {
             anim.SetBool("walking", true);
-            sr.flipX = true;
+            sr.flipX = false;
         }
         else if (horizontalMove < -0.1f )
         {
-            sr.flipX = false;
+            sr.flipX = true;
             anim.SetBool("walking", true);
         }
         else
